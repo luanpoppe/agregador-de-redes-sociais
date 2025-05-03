@@ -1,15 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
 import { Toaster } from "react-hot-toast";
-import { Link } from "react-router";
-import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Form } from "./Form";
 import { VoltarInicio } from "./VoltarInicio";
@@ -23,8 +13,6 @@ export function Login() {
         <Header />
 
         <Form />
-
-        <Footer />
       </Card>
     </section>
   );
