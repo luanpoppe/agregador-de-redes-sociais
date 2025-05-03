@@ -5,7 +5,7 @@ import { createUser } from "@/service/user.service";
 import { AuthTokensEnum } from "@/utils/enums/auth.enum";
 import { FieldValues, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-export function Login() {
+export function Register() {
   const {
     register,
     handleSubmit,
