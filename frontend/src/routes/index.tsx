@@ -1,8 +1,8 @@
 import { Root } from "@/main";
 import { createBrowserRouter } from "react-router";
 
-import { Register } from "./Register";
 import { Login } from "./Login";
+import { Register } from "./Register";
 
 export const routers = createBrowserRouter([
   {
