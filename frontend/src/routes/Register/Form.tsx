@@ -55,7 +55,8 @@ export function Form() {
                 message: "Por favor digite um nome.",
               },
               pattern: {
-                message: "Por favor digite pelo menos um nome e um sobrenome.",
+                message:
+                  "Por favor digite um nome válido com pelo menos um nome e um sobrenome.",
                 value: /\w+\s\w+/,
               },
             })}
