@@ -16,7 +16,7 @@ export function Form() {
     handleSubmit,
     getValues,
     formState: errors,
-  } = useForm<RegisterModel>({ mode: "onTouched" });
+  } = useForm<RegisterModel>({ mode: "onTouched", reValidateMode: "onChange" });
 
   const { isLoading, request } = useIsLoading(createUserOnSubmit);
   const navigate = useNavigate();
@@ -59,6 +59,10 @@ export function Form() {
                   "Por favor digite um nome válido com pelo menos um nome e um sobrenome.",
                 value: /\w+\s\w+/,
               },
+              minLength: {
+                message: "Digite um nome válido",
+                value: 3,
+              },
             })}
           />
           <FormError error={errors.errors.name} />
@@ -70,28 +74,59 @@ export function Form() {
             type="email"
             placeholder="Digite seu email"
             required
-            {...register("email")}
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Por favor digite um email.",
+              },
+              pattern: {
+                message: "Por favor digite um email válido.",
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              },
+            })}
           />
+          <FormError error={errors.errors.email} />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">senha</Label>
+          <Label htmlFor="password">Senha</Label>
           <Input
             id="password"
             type="password"
             placeholder="Digite sua senha"
             required
-            {...register("password")}
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Por favor digite uma senha.",
+              },
+              minLength: {
+                value: 4,
+                message: "A senha deve ter no mínimo 4 caracteres.",
+              },
+            })}
           />
+          <FormError error={errors.errors.password} />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password-repeat">Confirm Password</Label>
+          <Label htmlFor="password-repeat">Confirmar Senha</Label>
           <Input
             id="password-repeat"
             type="password"
             placeholder="Confirme sua senha"
             required
-            {...register("password-repeat")}
+            {...register("password-repeat", {
+              required: {
+                value: true,
+                message: "Por favor confirme sua senha.",
+              },
+              validate: (senha) => {
+                const senhaOriginal = getValues().password;
+                if (senha === senhaOriginal) return true;
+                return "Por favor, digite a mesma senha que você digitou no campo anterior.";
+              },
+            })}
           />
+          <FormError error={errors.errors["password-repeat"]} />
         </div>
 
         <ButtonPurpleGradient

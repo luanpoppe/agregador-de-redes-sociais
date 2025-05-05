@@ -6,7 +6,7 @@ export function Footer() {
     <CardFooter className="flex flex-col space-y-4">
       <div className="text-center text-sm">
         Já possui uma conta?{" "}
-        <Link className="text-blue-800" to={"/register"}>
+        <Link className="text-blue-800" to={"/login"}>
           Entrar
         </Link>
       </div>
