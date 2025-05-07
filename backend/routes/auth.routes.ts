@@ -10,7 +10,7 @@ const authRouter = express.Router();
 
 authRouter.route("/login").post(postLogin);
 authRouter.route("/logout").delete(deleteRefreshToken);
-authRouter.route("/check-token").delete(postCheckToken);
+authRouter.route("/check-token").post(postCheckToken);
 authRouter.route("/new-token").post(postNewTokenWithRefreshToken);
 
 export { authRouter };
