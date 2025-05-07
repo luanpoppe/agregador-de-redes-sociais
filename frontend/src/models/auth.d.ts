@@ -1,4 +1,4 @@
-export type TokensModel = {
+declare type TokensModel = {
   authToken: string;
   refreshToken: string;
 };
