@@ -65,6 +65,43 @@ export function postNewTokenWithRefreshToken(req: Request, res: Response) {
   });
 }
 
+export function postCheckToken(
+  req: RequestBody<{
+    accessToken?: string;
+    refreshToken?: string;
+  }>,
+  res: Response
+) {
+  const accessToken = req.body.accessToken;
+  const refreshToken = req.body.refreshToken;
+  if (accessToken) {
+    jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET, (err: any, user: any) => {
+      if (!err) {
+        res.json({ isValid: true });
+        return;
+      }
+    });
+  }
+  if (refreshToken) {
+    if (!refreshTokens.includes(refreshToken)) {
+      res.json({ isValid: false });
+      return;
+    }
+
+    jwt.verify(
+      refreshToken,
+      env.REFRESH_TOKEN_SECRET,
+      (err: any, user: any) => {
+        if (!err) {
+          res.json({ isValid: true });
+          return;
+        }
+        res.json({ isValid: false });
+      }
+    );
+  }
+}
+
 export function deleteRefreshToken(req: Request, res: Response) {
   refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204);
