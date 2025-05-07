@@ -24,3 +24,14 @@ export async function renewToken(body: { token: string }) {
   );
   return res.data;
 }
+
+export async function checkToken(body: {
+  accessToken?: string;
+  refreshToken?: string;
+}) {
+  const res = await axios.post<{ isValid: boolean }>(
+    `${apiUrl}/check-token`,
+    body
+  );
+  return res.data;
+}
