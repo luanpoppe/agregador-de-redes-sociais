@@ -8,8 +8,8 @@ export class ScrapePlayWright {
   youtube?: YoutubeScraper;
   instagram?: InstagramScraper;
 
-  async initializae() {
-    const browser = await chromium.launch({ headless: false });
+  async initializae(headless = true) {
+    const browser = await chromium.launch({ headless });
     this.browser = browser;
     const context = await browser.newContext({
       storageState: "storageState.json",

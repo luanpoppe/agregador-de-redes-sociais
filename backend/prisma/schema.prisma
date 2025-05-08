@@ -16,3 +16,12 @@ model Users {
 
   @@map("users")
 }
+
+model Channels {
+  id             Int    @id @default(autoincrement())
+  name           String?
+  channelId      String @unique
+  profilePicture String?
+
+  @@map("channels")
+}
