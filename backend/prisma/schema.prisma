@@ -9,19 +9,47 @@ datasource db {
 }
 
 model Users {
-  id       Int    @id @default(autoincrement())
-  name     String
-  email    String @unique
-  password String
+  id              Int               @id @default(autoincrement())
+  name            String
+  email           String            @unique
+  password        String
+  ChannelsByUsers ChannelsByUsers[]
 
   @@map("users")
 }
 
 model Channels {
-  id             Int    @id @default(autoincrement())
-  name           String?
-  channelId      String @unique
-  profilePicture String?
+  id                Int                 @id @default(autoincrement())
+  name              String?
+  channelId         String              @unique
+  profilePicture    String?
+  ChannelsByUsers   ChannelsByUsers[]
+  ContentsByChannel ContentsByChannel[]
 
   @@map("channels")
+}
+
+model ChannelsByUsers {
+  id       Int     @id @default(autoincrement())
+  category String?
+
+  user      Users    @relation(fields: [userId], references: [id])
+  userId    Int
+  channel   Channels @relation(fields: [channelId], references: [id])
+  channelId Int
+
+  @@map("channels_by_users")
+}
+
+model ContentsByChannel {
+  id      Int      @id @default(autoincrement())
+  date    DateTime
+  content String
+  image   String?
+  url     String
+
+  channel   Channels @relation(fields: [channelId], references: [id])
+  channelId Int
+
+  @@map("contents_by_channel")
 }

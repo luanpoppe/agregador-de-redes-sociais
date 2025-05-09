@@ -124,6 +124,29 @@ exports.Prisma.UsersScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.ChannelsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  channelId: 'channelId',
+  profilePicture: 'profilePicture'
+};
+
+exports.Prisma.ChannelsByUsersScalarFieldEnum = {
+  id: 'id',
+  category: 'category',
+  userId: 'userId',
+  channelId: 'channelId'
+};
+
+exports.Prisma.ContentsByChannelScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  content: 'content',
+  image: 'image',
+  url: 'url',
+  channelId: 'channelId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -134,9 +157,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Users: 'Users'
+  Users: 'Users',
+  Channels: 'Channels',
+  ChannelsByUsers: 'ChannelsByUsers',
+  ContentsByChannel: 'ContentsByChannel'
 };
 
 /**
