@@ -1,6 +1,6 @@
 import request from "supertest";
 import { app } from "../../app";
-import { LoginBody, User } from "../../models/users.model";
+import { User } from "../../models/users.model";
 import { prisma } from "../../prisma";
 import { CreateChannelBody } from "../../models/channels.model";
 

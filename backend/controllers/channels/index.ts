@@ -8,6 +8,10 @@ export async function postCreateChannel(
   req: RequestBody<CreateChannelBody>,
   res: Response
 ) {
-  const channel = await createChannel(req.body);
-  res.status(201).send(channel);
+  try {
+    const channel = await createChannel(req.body);
+    res.status(201).send(channel);
+  } catch (error) {
+    res.status(400).send({ err: error });
+  }
 }

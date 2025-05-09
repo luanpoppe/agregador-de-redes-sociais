@@ -14,15 +14,12 @@ export async function createChannel(body: CreateChannelBody) {
     if (!infos)
       throw new Error("Não foi possível obter as infos do canal do youtube");
     dbBody = infos;
-    // return dbBody;
   }
 
   try {
     const createdChannel = await prisma.channels.create({
       data: dbBody!,
     });
-
-    console.log("createdChannel: ", createdChannel);
 
     return createdChannel;
   } catch (error: any) {
