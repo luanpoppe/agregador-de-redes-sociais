@@ -183,13 +183,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://agregador-redes-sociais_owner:npg_fSP72slVCIGX@ep-polished-art-acljfoqd-pooler.sa-east-1.aws.neon.tech/agregador-redes-sociais?sslmode=require"
+        "fromEnvVar": "DATABASE_URL_TESTS",
+        "value": "postgresql://postgres:Poppekaua1@localhost/agregador-redes-testes"
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id              Int               @id @default(autoincrement())\n  name            String\n  email           String            @unique\n  password        String\n  ChannelsByUsers ChannelsByUsers[]\n\n  @@map(\"users\")\n}\n\nmodel Channels {\n  id                Int                 @id @default(autoincrement())\n  name              String?\n  channelId         String              @unique\n  profilePicture    String?\n  ChannelsByUsers   ChannelsByUsers[]\n  ContentsByChannel ContentsByChannel[]\n\n  @@map(\"channels\")\n}\n\nmodel ChannelsByUsers {\n  id       Int     @id @default(autoincrement())\n  category String?\n\n  user      Users    @relation(fields: [userId], references: [id])\n  userId    Int\n  channel   Channels @relation(fields: [channelId], references: [id])\n  channelId Int\n\n  @@map(\"channels_by_users\")\n}\n\nmodel ContentsByChannel {\n  id      Int      @id @default(autoincrement())\n  date    DateTime\n  content String\n  image   String?\n  url     String\n\n  channel   Channels @relation(fields: [channelId], references: [id])\n  channelId Int\n\n  @@map(\"contents_by_channel\")\n}\n",
-  "inlineSchemaHash": "f3c178ac2f7c14f3b2d8fad36f07960e90cf6c4a2e234b4875cea36d0b1f69cf",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // url      = env(\"DATABASE_URL\") // Dev\n  url      = env(\"DATABASE_URL_TESTS\") // Testes locais\n}\n\nmodel Users {\n  id              Int               @id @default(autoincrement())\n  name            String\n  email           String            @unique\n  password        String\n  ChannelsByUsers ChannelsByUsers[]\n\n  @@map(\"users\")\n}\n\nmodel Channels {\n  id                Int                 @id @default(autoincrement())\n  name              String?\n  channelId         String              @unique\n  profilePicture    String?\n  ChannelsByUsers   ChannelsByUsers[]\n  ContentsByChannel ContentsByChannel[]\n\n  @@map(\"channels\")\n}\n\nmodel ChannelsByUsers {\n  id       Int     @id @default(autoincrement())\n  category String?\n\n  user      Users    @relation(fields: [userId], references: [id])\n  userId    Int\n  channel   Channels @relation(fields: [channelId], references: [id])\n  channelId Int\n\n  @@map(\"channels_by_users\")\n}\n\nmodel ContentsByChannel {\n  id      Int      @id @default(autoincrement())\n  date    DateTime\n  content String\n  image   String?\n  url     String\n\n  channel   Channels @relation(fields: [channelId], references: [id])\n  channelId Int\n\n  @@map(\"contents_by_channel\")\n}\n",
+  "inlineSchemaHash": "111f4607c795498cdbe78535be74fed58ae83023f96e8031a60ee7720f3bb606",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -201,7 +201,7 @@ config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    DATABASE_URL_TESTS: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL_TESTS'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL_TESTS || undefined
   }
 })
 

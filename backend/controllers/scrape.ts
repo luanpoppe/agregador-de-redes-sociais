@@ -7,7 +7,7 @@ export async function getYoutubeScrape(
 ) {
   try {
     const scraper = new ScrapePlayWright();
-    await scraper.initializae();
+    await scraper.initialize();
     const { youtube } = scraper;
 
     const youtubeInfo = await youtube?.getYoutubeVideos(req.query.yt);

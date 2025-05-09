@@ -8,7 +8,7 @@ export class ScrapePlayWright {
   youtube?: YoutubeScraper;
   instagram?: InstagramScraper;
 
-  async initializae(headless = true) {
+  async initialize(headless = true) {
     const browser = await chromium.launch({ headless });
     this.browser = browser;
     const context = await browser.newContext({
@@ -28,7 +28,7 @@ export class ScrapePlayWright {
 
 async function scrapeWebsite() {
   const scraper = new ScrapePlayWright();
-  await scraper.initializae();
+  await scraper.initialize();
   const { youtube, instagram } = scraper;
 
   // const res = await youtube?.getYoutubeVideos("@phsantos");

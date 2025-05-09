@@ -2,11 +2,12 @@ import { Response } from "express";
 import { RequestBody } from "../../models/custom-express.model";
 import { Prisma } from "../../prisma/client";
 import { createChannel } from "./channels";
+import { CreateChannelBody } from "../../models/channels.model";
 
 export async function postCreateChannel(
-  req: RequestBody<Prisma.ChannelsCreateInput>,
+  req: RequestBody<CreateChannelBody>,
   res: Response
 ) {
   const channel = await createChannel(req.body);
-  res.send(channel);
+  res.status(201).send(channel);
 }
